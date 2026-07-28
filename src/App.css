@@ -1,0 +1,333 @@
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  text-align: left;
+}
+
+.app-header h1 {
+  font-size: 32px;
+  margin: 0 0 4px;
+  letter-spacing: -0.5px;
+}
+
+.app-header p {
+  margin: 0 0 24px;
+}
+
+/* Instrument */
+
+.instrument-select {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.instrument-select select {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+/* Collapsible sections */
+
+.section {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-h);
+  padding: 10px 14px;
+  background: var(--code-bg);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.section-header:hover {
+  color: var(--accent);
+}
+
+.section-chevron {
+  display: inline-block;
+  transition: transform 0.15s ease;
+  color: var(--accent);
+}
+
+.section-chevron.collapsed {
+  transform: rotate(-90deg);
+}
+
+.section-right {
+  margin-left: auto;
+  font-weight: 400;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.section-body {
+  padding: 16px;
+}
+
+/* Input */
+
+.abc-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.abc-input-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--border);
+  margin: 0 2px;
+}
+
+.toolbar-label {
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.abc-input-toolbar button {
+  font: inherit;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.abc-input-toolbar button:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.abc-dropzone {
+  position: relative;
+}
+
+.abc-textarea {
+  display: block;
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 145%;
+  min-height: 160px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--text-h);
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.abc-dropzone.dragging .abc-textarea {
+  border-color: var(--accent);
+  border-style: dashed;
+}
+
+.abc-dropzone-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--accent-bg);
+  border: 2px dashed var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+/* Banners */
+
+.banner {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.banner.error {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  color: #dc2626;
+}
+
+.banner.warning {
+  background: rgba(217, 119, 6, 0.12);
+  border: 1px solid rgba(217, 119, 6, 0.4);
+  color: #d97706;
+}
+
+/* Notation (abcjs renders SVG inside this) */
+
+.synth-player {
+  margin-bottom: 16px;
+}
+
+.notation {
+  overflow-x: auto;
+  margin-bottom: 8px;
+}
+
+.notation svg {
+  max-width: 100%;
+}
+
+/* Tab */
+
+
+.tab-header h2 {
+  margin: 0 0 4px;
+}
+
+.tab-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.measures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  row-gap: 20px;
+}
+
+.measure {
+  display: flex;
+  gap: 6px;
+  padding-right: 10px;
+  border-right: 1px solid var(--border);
+}
+
+.whistle-diagram {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.note-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+  line-height: 1;
+}
+
+.note-name sub {
+  font-size: 11px;
+}
+
+.hole-closed {
+  fill: var(--text-h);
+  stroke: var(--text-h);
+}
+
+.hole-open {
+  fill: var(--bg);
+  stroke: var(--text-h);
+  stroke-width: 1.5;
+}
+
+.hole-half-fill {
+  fill: var(--text-h);
+}
+
+.rest-mark {
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.breath-hint {
+  position: absolute;
+  top: 16px;
+  right: -2px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.note-flag {
+  position: absolute;
+  top: 14px;
+  left: -2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #d97706;
+}
+
+.whistle-diagram.disabled .hole {
+  opacity: 0.3;
+}
+
+.whistle-diagram.disabled .note-flag {
+  color: #dc2626;
+}
+
+.disabled-strike {
+  stroke: #dc2626;
+  stroke-width: 1.5;
+  opacity: 0.6;
+}
+
+.empty-hint {
+  opacity: 0.75;
+}
+
+/* Legend */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 28px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-glyph {
+  font-weight: 700;
+  color: var(--accent);
+}

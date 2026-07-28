@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx eslint *)",
+      "Bash(npm run *)",
+      "Bash(npx playwright *)",
+      "Bash(node check.mjs)"
+    ]
+  }
+}
