@@ -1,0 +1,29 @@
+{
+  "group": "Simple-System Flute (6-hole)",
+  "idPrefix": "flute",
+  "labelSuffix": "Irish Flute",
+  "holeCount": 6,
+  "keys": {
+    "Bb": 58,
+    "C": 60,
+    "D": 62,
+    "Eb": 63,
+    "F": 65,
+    "G": 67,
+    "A": 69
+  },
+  "fingering": {
+    "0": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed"] },
+    "1": { "holes": ["closed", "closed", "closed", "closed", "closed", "half"], "uncommon": true },
+    "2": { "holes": ["closed", "closed", "closed", "closed", "closed", "open"] },
+    "3": { "holes": ["closed", "closed", "closed", "half", "open", "open"], "note": "natural 4th (cross-fingered)" },
+    "4": { "holes": ["closed", "closed", "closed", "closed", "open", "open"] },
+    "5": { "holes": ["closed", "closed", "closed", "open", "open", "open"] },
+    "6": { "holes": ["closed", "closed", "half", "open", "open", "open"], "uncommon": true },
+    "7": { "holes": ["closed", "closed", "open", "open", "open", "open"] },
+    "8": { "holes": ["closed", "half", "open", "open", "open", "open"], "uncommon": true },
+    "9": { "holes": ["closed", "open", "open", "open", "open", "open"] },
+    "10": { "holes": ["open", "closed", "closed", "closed", "closed", "closed"], "note": "natural 7th (cross-fingered)" },
+    "11": { "holes": ["open", "open", "open", "open", "open", "open"] }
+  }
+}

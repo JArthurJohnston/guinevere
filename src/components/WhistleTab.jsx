@@ -27,9 +27,9 @@ export function WhistleTab({ tune, instrument }) {
           <div className="measure" key={mi}>
             {measure.map((ev, ei) =>
               ev.type === 'rest' ? (
-                <RestMark key={ei} instrument={instrument} />
+                <RestMark key={ei} instrument={instrument} duration={ev.duration} />
               ) : (
-                <WhistleDiagram key={ei} midi={ev.midi} instrument={instrument} />
+                <WhistleDiagram key={ei} midi={ev.midi} instrument={instrument} duration={ev.duration} />
               ),
             )}
           </div>

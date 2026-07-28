@@ -5,6 +5,7 @@ import 'abcjs/abcjs-audio.css'
 export function SynthPlayer({ tune }) {
   const containerRef = useRef(null)
   const controllerRef = useRef(null)
+  const hasLoadedTuneRef = useRef(false)
   const [supported] = useState(() => abcjs.synth.supportsAudio())
 
   useEffect(() => {
@@ -22,7 +23,16 @@ export function SynthPlayer({ tune }) {
 
   useEffect(() => {
     if (!controllerRef.current || !tune) return
-    controllerRef.current.setTune(tune, false).catch(() => {
+    console.log('updating tune in synth', tune);
+    
+    // The first tune must load lazily (userAction: false) so we don't try to
+    // resume the audio context before any user gesture has unlocked it.
+    // Later tune changes need userAction: true, otherwise the controller's
+    // isLoaded/midiBuffer state is never refreshed and play() keeps playing
+    // whatever tune was loaded first.
+    const isUserAction = hasLoadedTuneRef.current
+    hasLoadedTuneRef.current = true
+    controllerRef.current.setTune(tune, isUserAction).catch(() => {
       // e.g. the browser blocked audio until a user gesture - the play button still works
     })
   }, [tune])

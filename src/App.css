@@ -228,7 +228,6 @@
 
 .measure {
   display: flex;
-  gap: 6px;
   padding-right: 10px;
   border-right: 1px solid var(--border);
 }
