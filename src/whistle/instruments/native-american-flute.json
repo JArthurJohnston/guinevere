@@ -1,0 +1,24 @@
+{
+  "description": "Mode I hexatonic scale (root, b3, 4, 5, 6, b7 above the drone note), fingered by opening holes sequentially starting from the one nearest the foot end - the most commonly published tuning for a 6-hole Native American flute. Other traditions/makers use different modes and cross-fingerings; this chart covers only the primary scale tones, so the leading tone and all-holes-open fingering are left undefined rather than guessed at.",
+  "group": "Native American Flute (6-hole)",
+  "idPrefix": "naf",
+  "labelSuffix": "Native American Flute",
+  "holeCount": 6,
+  "keys": {
+    "Bb": 58,
+    "C": 60,
+    "D": 62,
+    "Eb": 63,
+    "F": 65,
+    "G": 67,
+    "A": 69
+  },
+  "fingering": {
+    "0": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed"], "note": "root / drone note" },
+    "3": { "holes": ["closed", "closed", "closed", "closed", "closed", "open"], "note": "minor 3rd" },
+    "5": { "holes": ["closed", "closed", "closed", "closed", "open", "open"], "note": "4th" },
+    "7": { "holes": ["closed", "closed", "closed", "open", "open", "open"], "note": "5th" },
+    "9": { "holes": ["closed", "closed", "open", "open", "open", "open"], "note": "6th" },
+    "10": { "holes": ["closed", "open", "open", "open", "open", "open"], "note": "minor 7th" }
+  }
+}

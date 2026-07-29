@@ -9,7 +9,7 @@
 
 const CHROMATIC_NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
-const MAX_SEMITONES_ABOVE_TONIC = 31 // spans root through a hard third-register overblow
+export const MAX_SEMITONES_ABOVE_TONIC = 31 // spans root through a hard third-register overblow
 
 export function midiToNoteName(midi) {
   const octave = Math.floor(midi / 12) - 1
@@ -36,7 +36,14 @@ export function getFingering(midi, instrument) {
   }
 
   if (!entry) {
-    return { ...base, holes: Array(instrument.holeCount).fill('open'), unplayable: true, uncommon: false, breathHint: null }
+    return {
+      ...base,
+      holes: Array(instrument.holeCount).fill('open'),
+      unplayable: true,
+      uncommon: false,
+      breathHint: null,
+      alternates: [],
+    }
   }
 
   return {
@@ -45,5 +52,6 @@ export function getFingering(midi, instrument) {
     unplayable: false,
     uncommon: !!entry.uncommon,
     breathHint: register === 1 ? null : register === 2 ? 'overblow' : 'hard overblow',
+    alternates: entry.alternates || [],
   }
 }

@@ -44,6 +44,7 @@ export function WhistleDiagram({ midi, instrument, duration }) {
   const height = diagramHeight(instrument.holeCount)
   const disabled = f.unplayable || f.outOfRange
   const flagged = disabled || f.uncommon
+  const hasAlternates = f.alternates.length > 0
 
   return (
     <div
@@ -67,6 +68,7 @@ export function WhistleDiagram({ midi, instrument, duration }) {
           {disabled ? '!' : '~'}
         </div>
       )}
+      {hasAlternates && <div className="note-alt">alt</div>}
     </div>
   )
 }
@@ -101,5 +103,10 @@ function diagramTitle(f) {
   if (f.uncommon) parts.push('uncommon cross-fingering')
   if (f.unplayable) parts.push('not in this instrument’s scale')
   if (f.outOfRange) parts.push('outside playable range')
-  return parts.join(' — ')
+  let title = parts.join(' — ')
+  if (f.alternates.length > 0) {
+    const alts = f.alternates.map((alt, i) => alt.note || `alternate fingering ${i + 1}`)
+    title += `\nAlso playable as: ${alts.join('; ')}`
+  }
+  return title
 }

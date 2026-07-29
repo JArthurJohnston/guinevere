@@ -16,9 +16,12 @@ chart drives every instrument in the picker:
 
 - **Tin whistle**, 6-hole, in Bb / C / D / Eb / F / G / A
 - **Simple-system flute**, 6-hole, same keys
-- **5-hole pentatonic whistle**, same keys — only the five pentatonic scale
-  degrees have a standard fingering, so notes outside that scale are flagged
-  as not playable rather than guessed at
+- **5-hole pentatonic whistle**, same keys — only the five major-pentatonic
+  scale degrees have a standard fingering, so notes outside that scale are
+  flagged as not playable rather than guessed at
+- **Native American flute**, 6-hole, same keys — tuned to the commonly
+  published "Mode I" hexatonic scale (root, b3, 4, 5, 6, b7), so notes
+  outside that scale are flagged as not playable rather than guessed at
 
 The tab marks which octave a note falls in (and when it needs overblowing),
 cross-fingered accidentals that aren't fully standardized, and notes outside
@@ -47,7 +50,17 @@ instrument list.
   "keys": { "D": 62, "G": 67 },
   "fingering": {
     "0": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed"] },
-    "2": { "holes": ["closed", "closed", "closed", "closed", "closed", "open"], "uncommon": true, "note": "optional free-text context" }
+    "2": {
+      "holes": ["closed", "closed", "closed", "closed", "closed", "open"],
+      "uncommon": true,
+      "note": "optional free-text context, not read by the app",
+      "alternates": [
+        {
+          "holes": ["closed", "closed", "closed", "closed", "half", "open"],
+          "note": "shown in the tooltip when this note has more than one valid fingering"
+        }
+      ]
+    }
   }
 }
 ```
@@ -59,12 +72,14 @@ instrument list.
 | `labelSuffix` | Combined with each key to form the dropdown label, e.g. `D Whistle`. |
 | `holeCount` | Number of holes drawn in the tab diagram. |
 | `keys` | Map of key name → tonic MIDI pitch (the note sounded with every hole closed). One instrument is generated per entry. |
-| `fingering` | Map of semitone step above the tonic (`"0"`–`"11"`) → `{ holes, uncommon?, note? }`. `holes` is an array of `"closed"` / `"open"` / `"half"`, length `holeCount`, ordered from the hole nearest the mouthpiece down. Steps with no entry are treated as unplayable on that instrument. `uncommon: true` flags a cross-fingering that varies between players/instruments rather than a settled standard. `note` is optional free-text documentation and isn't read by the app. |
+| `fingering` | Map of semitone step above the tonic (`"0"`–`"11"`) → `{ holes, uncommon?, note?, alternates? }`. `holes` is an array of `"closed"` / `"open"` / `"half"`, length `holeCount`, ordered from the hole nearest the mouthpiece down. Steps with no entry are treated as unplayable on that instrument. `uncommon: true` flags a cross-fingering that varies between players/instruments rather than a settled standard. The top-level `note` is free-text documentation and isn't read by the app. |
+| `fingering[step].alternates` | Optional array of `{ holes, note? }` for other valid fingerings of that note. The diagram still draws the top-level `holes` as the primary fingering and shows a small "alt" marker; hovering it (or the diagram itself) lists each alternate's `note` in the tooltip — so write `note` as the text you want a player to see (e.g. `"3rd finger half-hole, easier coming from A"`), not just internal commentary. |
 | `description` | Optional free-text note about the family as a whole (e.g. why some steps are omitted); not read by the app. |
 
 To add a key to an existing family, add an entry to that family's `keys`
-map. To add a new family, drop a new JSON file in the folder, then import it
-and add it to the `FAMILIES` array in `src/whistle/instruments.js`.
+map. To add a new family (including one of your own with custom
+fingerings), drop a new JSON file in the folder in this same shape, then
+import it and add it to the `FAMILIES` array in `src/whistle/instruments.js`.
 
 ## Getting started
 

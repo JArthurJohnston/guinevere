@@ -232,6 +232,24 @@
   border-right: 1px solid var(--border);
 }
 
+/* Fingering chart */
+
+.fingering-chart-row {
+  margin-bottom: 24px;
+}
+
+.fingering-chart-row h3 {
+  font-size: 14px;
+  margin: 0 0 12px;
+  opacity: 0.8;
+}
+
+.fingering-chart-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 16px;
+}
+
 .whistle-diagram {
   position: relative;
   display: flex;
@@ -287,6 +305,19 @@
   font-size: 12px;
   font-weight: 700;
   color: #d97706;
+}
+
+.note-alt {
+  position: absolute;
+  bottom: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+  cursor: default;
+  white-space: nowrap;
 }
 
 .whistle-diagram.disabled .hole {

@@ -1,0 +1,15 @@
+{
+  "description": "A specific 6-hole Native American style flute in D, with fingerings confirmed by ear rather than taken from a published standard chart. Its scale differs from the generic Mode I flute already in this app (major 3rd here vs. minor 3rd there), so it's its own family. Only the fingerings that have actually been verified are listed below - other steps are left undefined rather than guessed at. Add more as they're confirmed.",
+  "group": "Custom Native American Flute (6-hole)",
+  "idPrefix": "naf-custom",
+  "labelSuffix": "Custom NAF",
+  "holeCount": 6,
+  "keys": {
+    "D": 62
+  },
+  "fingering": {
+    "0": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed"], "note": "root / drone note (D)" },
+    "2": { "holes": ["closed", "closed", "closed", "closed", "closed", "half"], "note": "major 2nd (E)" },
+    "4": { "holes": ["closed", "closed", "closed", "closed", "open", "closed"], "note": "major 3rd (F#)" }
+  }
+}

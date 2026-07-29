@@ -10,8 +10,10 @@
 import tinWhistle from './instruments/tin-whistle.json'
 import simpleSystemFlute from './instruments/simple-system-flute.json'
 import pentatonic from './instruments/pentatonic.json'
+import nativeAmericanFlute from './instruments/native-american-flute.json'
+import nativeAmericanFluteCustom from './instruments/native-american-flute-custom.json'
 
-const FAMILIES = [tinWhistle, simpleSystemFlute, pentatonic]
+const FAMILIES = [tinWhistle, simpleSystemFlute, pentatonic, nativeAmericanFlute, nativeAmericanFluteCustom]
 
 function buildGroup(family) {
   return {
