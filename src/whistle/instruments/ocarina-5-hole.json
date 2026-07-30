@@ -1,0 +1,26 @@
+{
+  "description": "A simple 5-hole pendant-style ocarina, fingered by opening holes sequentially starting from the one nearest the mouthpiece end - the common convention for cheap mass-produced 5-hole ocarinas, even though ocarinas are closed-vessel (Helmholtz) resonators rather than open tubes like the whistle, so this sequential model is a convention rather than strict acoustics. Only the major-pentatonic scale degrees (root, 2, 3, 5, 6) have a settled standard fingering; other steps are left undefined rather than guessing at a cross-fingering, since ocarina designs and hole placement vary too much to have one settled answer. Ocarinas also don't overblow cleanly to a second register the way whistles do, so range is capped at these six notes.",
+  "group": "5-hole Ocarina",
+  "idPrefix": "ocarina",
+  "labelSuffix": "Ocarina (5-hole)",
+  "holeCount": 5,
+  "layout": "ocarina-5",
+  "overblow": false,
+  "definedFingeringsOnly": true,
+  "keys": {
+    "Bb": 58,
+    "C": 60,
+    "D": 62,
+    "Eb": 63,
+    "F": 65,
+    "G": 67,
+    "A": 69
+  },
+  "fingering": {
+    "0": { "holes": ["closed", "closed", "closed", "closed", "closed"] },
+    "2": { "holes": ["closed", "closed", "closed", "closed", "open"] },
+    "4": { "holes": ["closed", "closed", "closed", "open", "open"] },
+    "7": { "holes": ["closed", "closed", "open", "open", "open"] },
+    "9": { "holes": ["closed", "open", "open", "open", "open"] }
+  }
+}
