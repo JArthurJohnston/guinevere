@@ -17,7 +17,7 @@
 
 /* Instrument */
 
-.instrument-select {
+.basic-select {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -25,7 +25,7 @@
   margin-bottom: 16px;
 }
 
-.instrument-select select {
+.basic-select select {
   font: inherit;
   font-size: 14px;
   padding: 6px 10px;
@@ -113,7 +113,7 @@
   opacity: 0.75;
 }
 
-.abc-input-toolbar button {
+.button {
   font: inherit;
   font-size: 14px;
   padding: 6px 12px;
@@ -124,7 +124,7 @@
   cursor: pointer;
 }
 
-.abc-input-toolbar button:hover {
+.button:hover {
   border-color: var(--accent-border);
   color: var(--accent);
 }
@@ -360,4 +360,11 @@
 .legend-glyph {
   font-weight: 700;
   color: var(--accent);
+}
+
+.control-group {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
 }

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { AbcInput } from "./components/AbcInput";
+import { AbcInput } from "./components/abc-inputs/AbcInput";
 import { Notation } from "./components/Notation";
 import { WhistleTab } from "./components/WhistleTab";
 import { FingeringChart } from "./components/FingeringChart";
@@ -10,6 +10,8 @@ import { extractNoteSequence } from "./abc/extractTune";
 import { EXAMPLES } from "./abc/examples";
 import { DEFAULT_INSTRUMENT_ID, getInstrument } from "./whistle/instruments";
 import "./App.css";
+import { TuneSelect } from "./components/TuneSelect";
+import { UploadFileButton } from "./components/primitives/UploadFileButton";
 
 function App() {
   const [abc, setAbc] = useState(EXAMPLES[0].abc);
@@ -19,6 +21,8 @@ function App() {
   const [error, setError] = useState(null);
   const [warnings, setWarnings] = useState([]);
   const instrument = getInstrument(instrumentId);
+
+  const updateTune = (data) => setAbc(data);
 
   const handleRendered = useCallback((renderedTune) => {
     setTune(renderedTune);
@@ -49,10 +53,18 @@ function App() {
         </p>
       </header>
 
-      <InstrumentSelect value={instrumentId} onChange={setInstrumentId} />
+      <div className="control-group">
+        <InstrumentSelect value={instrumentId} onChange={setInstrumentId} />
+        <TuneSelect value={abc} onChange={updateTune} />
+        <UploadFileButton
+          onFile={updateTune}
+          label="Upload .abc file"
+          accept=".abc,text/plain"
+        />
+      </div>
 
       <Section title="ABC Notation">
-        <AbcInput value={abc} onChange={setAbc} />
+        <AbcInput value={abc} onChange={updateTune} />
       </Section>
 
       <Section title="Standard Notation">
