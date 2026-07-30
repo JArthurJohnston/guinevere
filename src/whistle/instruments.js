@@ -24,6 +24,8 @@ function buildGroup(family) {
       holeCount: family.holeCount,
       tonicMidi,
       fingering: family.fingering,
+      overblow: family.overblow !== false,
+      definedFingeringsOnly: !!family.definedFingeringsOnly,
     })),
   }
 }
@@ -32,7 +34,7 @@ export const INSTRUMENT_GROUPS = FAMILIES.map(buildGroup)
 
 export const INSTRUMENTS = INSTRUMENT_GROUPS.flatMap((g) => g.instruments)
 
-export const DEFAULT_INSTRUMENT_ID = 'whistle-D'
+export const DEFAULT_INSTRUMENT_ID = 'whistle-D4'
 
 export function getInstrument(id) {
   return INSTRUMENTS.find((i) => i.id === id) || INSTRUMENTS.find((i) => i.id === DEFAULT_INSTRUMENT_ID)

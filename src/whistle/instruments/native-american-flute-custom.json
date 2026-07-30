@@ -4,12 +4,67 @@
   "idPrefix": "naf-custom",
   "labelSuffix": "Custom NAF",
   "holeCount": 6,
+  "overblow": false,
+  "definedFingeringsOnly": true,
   "keys": {
-    "D": 62
+    "D": 74
   },
   "fingering": {
-    "0": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed"], "note": "root / drone note (D)" },
-    "2": { "holes": ["closed", "closed", "closed", "closed", "closed", "half"], "note": "major 2nd (E)" },
-    "4": { "holes": ["closed", "closed", "closed", "closed", "open", "closed"], "note": "major 3rd (F#)" }
+    "0": {
+      "holes": ["closed", "closed", "closed", "closed", "closed", "closed"],
+      "note": "D5"
+    },
+    "2": {
+      "holes": ["closed", "closed", "closed", "closed", "closed", "half"],
+      "note": "E5"
+    },
+    "3": {
+      "holes": ["closed", "closed", "closed", "closed", "closed", "open"],
+      "note": "F5"
+    },
+    "4": {
+      "holes": ["closed", "closed", "closed", "closed", "open", "closed"],
+      "note": "F#5"
+    },
+    "5": {
+      "holes": ["closed", "closed", "closed", "closed", "open", "open"],
+      "note": "G5"
+    },
+    "6": {
+      "holes": ["closed", "closed", "closed", "open", "closed", "open"],
+      "note": "G#5"
+    },
+    "7": {
+      "holes": ["closed", "closed", "closed", "open", "open", "open"],
+      "note": "A5"
+    },
+    "8": {
+      "holes": ["closed", "closed", "closed", "open", "closed", "open"],
+      "note": "A#5"
+    },
+    "9": {
+      "holes": ["closed", "closed", "open", "open", "open", "open"],
+      "note": "B5"
+    },
+    "10": {
+      "holes": ["closed", "open", "closed", "open", "open", "open"],
+      "note": "C6"
+    },
+    "11": {
+      "holes": ["closed", "open", "open", "open", "open", "open"],
+      "note": "C#6"
+    },
+    "12": {
+      "holes": ["open", "open", "closed", "open", "open", "open"],
+      "note": "D6"
+    },
+    "13": {
+      "holes": ["open", "closed", "closed", "closed", "closed", "closed"],
+      "note": "D6#"
+    },
+    "23": {
+      "holes": ["open", "closed", "closed", "open", "open", "open"],
+      "note": "C#6"
+    }
   }
 }

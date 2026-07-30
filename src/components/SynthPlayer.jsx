@@ -23,7 +23,6 @@ export function SynthPlayer({ tune }) {
 
   useEffect(() => {
     if (!controllerRef.current || !tune) return
-    console.log('updating tune in synth', tune);
     
     // The first tune must load lazily (userAction: false) so we don't try to
     // resume the audio context before any user gesture has unlocked it.
