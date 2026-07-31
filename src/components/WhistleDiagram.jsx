@@ -1,8 +1,8 @@
 import { getFingering } from '../whistle/fingeringChart'
+import { isOcarina5Hole, ocarina5Dimensions } from '../whistle/ocarinaLayout'
+import { Hole, HOLE_R, HOLE_GAP, TOP_PAD } from './DiagramHole'
+import { Ocarina5SvgBody } from './OcarinaDiagram'
 
-const HOLE_R = 7
-const HOLE_GAP = 17
-const TOP_PAD = 6
 const WIDTH = 40
 
 // abcjs expresses `duration` as a fraction of a whole note (e.g. 0.25 for a
@@ -16,79 +16,32 @@ function gapStyle(duration) {
   return { marginRight: `${Math.max(MIN_GAP, duration * DURATION_GAP_SCALE)}px` }
 }
 
-function diagramHeight(holeCount) {
-  return TOP_PAD * 2 + HOLE_GAP * (holeCount - 1) + HOLE_R * 2
+function tubeDimensions(holeCount) {
+  return { width: WIDTH, height: TOP_PAD * 2 + HOLE_GAP * (holeCount - 1) + HOLE_R * 2 }
 }
 
-// Ocarinas are a rounded vessel rather than a tube, and their holes are
-// fingered in a 2D cluster rather than a straight line. The 4 front holes
-// (array indices 1-4, played by fingers) are drawn as a 2x2 grid inside the
-// body outline; index 0 (the thumb hole, played from the back of the
-// instrument) is drawn as a separate circle below and outside the body,
-// the way printed ocarina fingering charts do it. A short "neck" line off
-// the bottom of the body marks the windway/mouthpiece for orientation.
-const OCARINA_5_WIDTH = 56
-const OCARINA_5_DX = 13 // horizontal offset of each front-hole pair from center
-const OCARINA_5_BODY_PAD = 4 // gap between the front holes and the body outline
-const OCARINA_5_NECK_LEN = 6 // length of the blowhole/neck mark below the body
-const OCARINA_5_BACK_GAP = 4 // gap between the neck mark and the back hole
-
-const OCARINA_5_ROW1_Y = TOP_PAD + HOLE_R
-const OCARINA_5_ROW2_Y = OCARINA_5_ROW1_Y + HOLE_GAP
-const OCARINA_5_BODY_CX = OCARINA_5_WIDTH / 2
-const OCARINA_5_BODY_CY = (OCARINA_5_ROW1_Y + OCARINA_5_ROW2_Y) / 2
-const OCARINA_5_BODY_RX = OCARINA_5_DX + HOLE_R + OCARINA_5_BODY_PAD
-const OCARINA_5_BODY_RY = (OCARINA_5_ROW2_Y - OCARINA_5_ROW1_Y) / 2 + HOLE_R + OCARINA_5_BODY_PAD
-const OCARINA_5_BODY_BOTTOM = OCARINA_5_BODY_CY + OCARINA_5_BODY_RY
-const OCARINA_5_NECK_Y2 = OCARINA_5_BODY_BOTTOM + OCARINA_5_NECK_LEN
-const OCARINA_5_BACK_HOLE_CY = OCARINA_5_NECK_Y2 + OCARINA_5_BACK_GAP + HOLE_R
-const OCARINA_5_HEIGHT = OCARINA_5_BACK_HOLE_CY + HOLE_R + TOP_PAD
-
-const OCARINA_5_POSITIONS = [
-  { cx: OCARINA_5_BODY_CX, cy: OCARINA_5_BACK_HOLE_CY },
-  { cx: OCARINA_5_BODY_CX - OCARINA_5_DX, cy: OCARINA_5_ROW1_Y },
-  { cx: OCARINA_5_BODY_CX + OCARINA_5_DX, cy: OCARINA_5_ROW1_Y },
-  { cx: OCARINA_5_BODY_CX - OCARINA_5_DX, cy: OCARINA_5_ROW2_Y },
-  { cx: OCARINA_5_BODY_CX + OCARINA_5_DX, cy: OCARINA_5_ROW2_Y },
-]
-
-function ocarinaLayout(instrument) {
-  if (instrument.layout === 'ocarina-5' && instrument.holeCount === 5) {
-    return {
-      width: OCARINA_5_WIDTH,
-      height: OCARINA_5_HEIGHT,
-      positions: OCARINA_5_POSITIONS,
-      body: { cx: OCARINA_5_BODY_CX, cy: OCARINA_5_BODY_CY, rx: OCARINA_5_BODY_RX, ry: OCARINA_5_BODY_RY },
-      neck: { x: OCARINA_5_BODY_CX, y1: OCARINA_5_BODY_BOTTOM, y2: OCARINA_5_NECK_Y2 },
-    }
-  }
-  return null
+// Each instrument shape owns its own dimensions and SVG body renderer, so
+// adding a new body shape (e.g. a 6-hole ocarina) means adding a case here
+// rather than touching the tube-specific layout below.
+function dimensionsFor(instrument) {
+  return isOcarina5Hole(instrument) ? ocarina5Dimensions() : tubeDimensions(instrument.holeCount)
 }
 
-function Hole({ state, cx, cy }) {
-  if (state === 'open') {
-    return <circle cx={cx} cy={cy} r={HOLE_R} className="hole hole-open" />
-  }
-  if (state === 'half') {
-    return (
-      <g>
-        <circle cx={cx} cy={cy} r={HOLE_R} className="hole hole-open" />
-        <path
-          d={`M ${cx - HOLE_R} ${cy} A ${HOLE_R} ${HOLE_R} 0 0 1 ${cx + HOLE_R} ${cy} Z`}
-          className="hole-half-fill"
-        />
-      </g>
-    )
-  }
-  return <circle cx={cx} cy={cy} r={HOLE_R} className="hole hole-closed" />
+function TubeSvgBody({ f, width, height, disabled }) {
+  const cx = width / 2
+  return (
+    <>
+      {f.holes.map((state, i) => (
+        <Hole key={i} state={state} cx={cx} cy={TOP_PAD + HOLE_R + i * HOLE_GAP} />
+      ))}
+      {disabled && <line x1={5} y1={5} x2={width - 5} y2={height - 5} className="disabled-strike" />}
+    </>
+  )
 }
 
 export function WhistleDiagram({ midi, instrument, duration }) {
   const f = getFingering(midi, instrument)
-  const ocarina = ocarinaLayout(instrument)
-  const width = ocarina ? ocarina.width : WIDTH
-  const height = ocarina ? ocarina.height : diagramHeight(instrument.holeCount)
-  const cx = width / 2
+  const { width, height } = dimensionsFor(instrument)
   const disabled = f.unplayable || f.outOfRange
   const flagged = disabled || f.uncommon
   const hasAlternates = f.alternates.length > 0
@@ -104,20 +57,11 @@ export function WhistleDiagram({ midi, instrument, duration }) {
         <sub>{octaveSuffix(f)}</sub>
       </div>
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-        {ocarina && (
-          <>
-            <ellipse cx={ocarina.body.cx} cy={ocarina.body.cy} rx={ocarina.body.rx} ry={ocarina.body.ry} className="ocarina-body" />
-            <line x1={ocarina.neck.x} y1={ocarina.neck.y1} x2={ocarina.neck.x} y2={ocarina.neck.y2} className="ocarina-neck" />
-          </>
+        {isOcarina5Hole(instrument) ? (
+          <Ocarina5SvgBody f={f} disabled={disabled} />
+        ) : (
+          <TubeSvgBody f={f} width={width} height={height} disabled={disabled} />
         )}
-        {f.holes.map((state, i) =>
-          ocarina ? (
-            <Hole key={i} state={state} cx={ocarina.positions[i].cx} cy={ocarina.positions[i].cy} />
-          ) : (
-            <Hole key={i} state={state} cx={cx} cy={TOP_PAD + HOLE_R + i * HOLE_GAP} />
-          ),
-        )}
-        {disabled && <line x1={5} y1={5} x2={width - 5} y2={height - 5} className="disabled-strike" />}
       </svg>
       {!disabled && f.breathHint && <div className="breath-hint">{f.breathHint === 'overblow' ? '↑' : '⇈'}</div>}
       {flagged && (
@@ -131,9 +75,7 @@ export function WhistleDiagram({ midi, instrument, duration }) {
 }
 
 export function RestMark({ instrument, duration }) {
-  const ocarina = ocarinaLayout(instrument)
-  const width = ocarina ? ocarina.width : WIDTH
-  const height = ocarina ? ocarina.height : diagramHeight(instrument.holeCount)
+  const { width, height } = dimensionsFor(instrument)
   return (
     <div className="whistle-diagram rest" title="Rest" style={gapStyle(duration)}>
       <div className="note-name">&nbsp;</div>
