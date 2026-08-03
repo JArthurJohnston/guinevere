@@ -13,8 +13,17 @@ import pentatonic from './instruments/pentatonic.json'
 import nativeAmericanFlute from './instruments/native-american-flute.json'
 import nativeAmericanFluteCustom from './instruments/native-american-flute-custom.json'
 import ocarina5Hole from './instruments/ocarina-5-hole.json'
+import ocarina12Hole from './instruments/ocarina-12-hole.json'
 
-const FAMILIES = [tinWhistle, simpleSystemFlute, pentatonic, nativeAmericanFlute, nativeAmericanFluteCustom, ocarina5Hole]
+const FAMILIES = [
+  tinWhistle,
+  simpleSystemFlute,
+  pentatonic,
+  nativeAmericanFlute,
+  nativeAmericanFluteCustom,
+  ocarina5Hole,
+  ocarina12Hole,
+]
 
 function buildGroup(family) {
   return {

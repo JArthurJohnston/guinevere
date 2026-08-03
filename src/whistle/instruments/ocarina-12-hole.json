@@ -1,0 +1,34 @@
+{
+  "description": "A 12-hole ocarina (2 back thumb holes + 10 front finger holes), fingered with the same sequential opening convention used by this app's other holed instruments rather than a manufacturer's authentic English-system chart - the real English system uses specific hole combinations (and an extended upper range) that vary enough between makers that guessing at them from memory risked being confidently wrong. With 12 holes opening one at a time from thumbs to front, this gives an honest, fully-defined chromatic octave (root through the octave, semitones 0-12); it does not reach the extra range above the octave that real 12-hole ocarinas have, and doesn't reflect any particular maker's authentic cross-fingerings. Swap in a manufacturer's chart here if you have one to confirm against.",
+  "group": "12-hole Ocarina",
+  "idPrefix": "ocarina12",
+  "labelSuffix": "Ocarina (12-hole)",
+  "holeCount": 12,
+  "layout": "ocarina-12",
+  "overblow": false,
+  "definedFingeringsOnly": true,
+  "keys": {
+    "Bb": 58,
+    "C": 60,
+    "D": 62,
+    "Eb": 63,
+    "F": 65,
+    "G": 67,
+    "A": 69
+  },
+  "fingering": {
+    "0": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed"] },
+    "1": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "open"] },
+    "2": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "open", "open"] },
+    "3": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "open", "open", "open"] },
+    "4": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "closed", "closed", "open", "open", "open", "open"] },
+    "5": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "closed", "open", "open", "open", "open", "open"] },
+    "6": { "holes": ["closed", "closed", "closed", "closed", "closed", "closed", "open", "open", "open", "open", "open", "open"] },
+    "7": { "holes": ["closed", "closed", "closed", "closed", "closed", "open", "open", "open", "open", "open", "open", "open"] },
+    "8": { "holes": ["closed", "closed", "closed", "closed", "open", "open", "open", "open", "open", "open", "open", "open"] },
+    "9": { "holes": ["closed", "closed", "closed", "open", "open", "open", "open", "open", "open", "open", "open", "open"] },
+    "10": { "holes": ["closed", "closed", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"] },
+    "11": { "holes": ["closed", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"] },
+    "12": { "holes": ["open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open", "open"] }
+  }
+}

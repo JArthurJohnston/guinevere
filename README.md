@@ -107,3 +107,8 @@ src/
     instruments/  one JSON file per instrument family (see below)
   components/   UI (input, notation, tab, player, instrument picker)
 ```
+
+## Notes
+
+### 12 Hole Ocarinas
+Real 12-hole ocarinas use a "English system" fingering chart with specific hole combinations and an extended upper range that I (Claude) don't have reliable enough confidence to reproduce from memory without risking a wrong answer. So instead I extended this app's existing sequential-hole-opening convention (same approach used for the 5-hole ocarina) to 12 holes — thumbs open first, then front holes alternating hands from pinky to index. That happens to work out cleanly: 12 holes opening one at a time gives a fully-defined, honest chromatic octave (all 13 semitones, root through the octave), but it does not capture the extra upper range or authentic cross-fingerings a real instrument has. If you've got a manufacturer chart or a specific instrument to confirm against, I can swap the fingering table for the real one.

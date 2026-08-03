@@ -1,7 +1,7 @@
 import { getFingering } from '../whistle/fingeringChart'
-import { isOcarina5Hole, ocarina5Dimensions } from '../whistle/ocarinaLayout'
+import { isOcarina5Hole, ocarina5Dimensions, isOcarina12Hole, ocarina12Dimensions } from '../whistle/ocarinaLayout'
 import { Hole, HOLE_R, HOLE_GAP, TOP_PAD } from './DiagramHole'
-import { Ocarina5SvgBody } from './OcarinaDiagram'
+import { Ocarina5SvgBody, Ocarina12SvgBody } from './OcarinaDiagram'
 
 const WIDTH = 40
 
@@ -20,13 +20,6 @@ function tubeDimensions(holeCount) {
   return { width: WIDTH, height: TOP_PAD * 2 + HOLE_GAP * (holeCount - 1) + HOLE_R * 2 }
 }
 
-// Each instrument shape owns its own dimensions and SVG body renderer, so
-// adding a new body shape (e.g. a 6-hole ocarina) means adding a case here
-// rather than touching the tube-specific layout below.
-function dimensionsFor(instrument) {
-  return isOcarina5Hole(instrument) ? ocarina5Dimensions() : tubeDimensions(instrument.holeCount)
-}
-
 function TubeSvgBody({ f, width, height, disabled }) {
   const cx = width / 2
   return (
@@ -39,8 +32,26 @@ function TubeSvgBody({ f, width, height, disabled }) {
   )
 }
 
+// Each non-tube body shape owns its own dimensions and SVG body renderer;
+// adding another one (e.g. a 6-hole ocarina) means adding an entry here
+// rather than touching the tube-specific layout above.
+const SHAPES = [
+  { test: isOcarina5Hole, dimensions: ocarina5Dimensions, Body: Ocarina5SvgBody },
+  { test: isOcarina12Hole, dimensions: ocarina12Dimensions, Body: Ocarina12SvgBody },
+]
+
+function shapeFor(instrument) {
+  return SHAPES.find((shape) => shape.test(instrument))
+}
+
+function dimensionsFor(instrument) {
+  const shape = shapeFor(instrument)
+  return shape ? shape.dimensions() : tubeDimensions(instrument.holeCount)
+}
+
 export function WhistleDiagram({ midi, instrument, duration }) {
   const f = getFingering(midi, instrument)
+  const shape = shapeFor(instrument)
   const { width, height } = dimensionsFor(instrument)
   const disabled = f.unplayable || f.outOfRange
   const flagged = disabled || f.uncommon
@@ -57,11 +68,7 @@ export function WhistleDiagram({ midi, instrument, duration }) {
         <sub>{octaveSuffix(f)}</sub>
       </div>
       <svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-        {isOcarina5Hole(instrument) ? (
-          <Ocarina5SvgBody f={f} disabled={disabled} />
-        ) : (
-          <TubeSvgBody f={f} width={width} height={height} disabled={disabled} />
-        )}
+        {shape ? <shape.Body f={f} disabled={disabled} /> : <TubeSvgBody f={f} width={width} height={height} disabled={disabled} />}
       </svg>
       {!disabled && f.breathHint && <div className="breath-hint">{f.breathHint === 'overblow' ? '↑' : '⇈'}</div>}
       {flagged && (
