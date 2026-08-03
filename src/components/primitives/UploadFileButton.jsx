@@ -1,7 +1,9 @@
 import { useRef } from "react";
+import { useABC } from "../../context/abcContext";
 
-export function UploadFileButton({ onFile, label, accept = "text/plain" }) {
+export function UploadFileButton({ label, accept = "text/plain" }) {
   const fileInputRef = useRef(null);
+  const { updateTune } = useABC();
 
   const handleFile = (e) => {
     loadFile(e.target.files?.[0]);
@@ -11,13 +13,17 @@ export function UploadFileButton({ onFile, label, accept = "text/plain" }) {
   const loadFile = (file) => {
     if (!file) return;
     const reader = new FileReader();
-    reader.onload = () => onFile(String(reader.result));
+    reader.onload = () => updateTune(String(reader.result));
     reader.readAsText(file);
   };
 
   return (
     <>
-      <button className="button" type="button" onClick={() => fileInputRef.current?.click()}>
+      <button
+        className="button"
+        type="button"
+        onClick={() => fileInputRef.current?.click()}
+      >
         {label}
       </button>
       <input

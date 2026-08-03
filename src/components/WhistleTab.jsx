@@ -1,7 +1,9 @@
 import { WhistleDiagram, RestMark } from './WhistleDiagram'
 import { Legend } from './Legend'
+import { useInstrument } from '../context/instrumentContext'
 
-export function WhistleTab({ tune, instrument }) {
+export function WhistleTab({ tune }) {
+  const { instrument } = useInstrument()
   if (!tune) {
     return <p className="empty-hint">Paste or upload some ABC notation above to see a tab here.</p>
   }

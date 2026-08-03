@@ -1,6 +1,7 @@
 import { WhistleDiagram } from './WhistleDiagram'
 import { Legend } from './Legend'
 import { maxSemitonesAboveTonic } from '../whistle/fingeringChart'
+import { useInstrument } from '../context/instrumentContext'
 
 const REGISTER_LABELS_WITH_OVERBLOW = {
   1: '1st octave',
@@ -17,7 +18,8 @@ const REGISTER_LABELS_WITHOUT_OVERBLOW = {
   3: '3rd octave',
 }
 
-export function FingeringChart({ instrument }) {
+export function FingeringChart() {
+  const {instrument } = useInstrument()
   const registerLabels = instrument.overblow === false ? REGISTER_LABELS_WITHOUT_OVERBLOW : REGISTER_LABELS_WITH_OVERBLOW
   const registers = new Map()
   for (let offset = 0; offset <= maxSemitonesAboveTonic(instrument); offset++) {
